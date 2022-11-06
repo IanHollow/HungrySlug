@@ -11,7 +11,7 @@ class DinningHall:
             'Dinner': [],
             'Late Night': []
         }
-        self.retrive_data(url)
+        self.retrieve_data(url)
 
     def get_name(self) -> str:
         return self.name
@@ -22,7 +22,10 @@ class DinningHall:
         else:
             raise KeyError(f"meal type {meal} not available")
 
-    def retrive_data(self, url: str) -> None:
+    def get_foods(self) -> dict:
+        return self.foods
+
+    def retrieve_data(self, url: str) -> None:
         cookies = {
             'WebInaCartLocation': '',
             'WebInaCartDates': '',
@@ -50,4 +53,22 @@ class DinningHall:
                 mt_index += 1
             else:
                 self.foods[meal_times[mt_index]].append(
-                    element.get_text().strip())
+                    element.get_text(strip=True))
+
+    def __str__(self) -> str:
+        result = f"{self.name}\n"
+        for meal_time in self.foods.keys():
+            result += f"    {meal_time}:\n"
+            for food in self.foods[meal_time]:
+                result += f"        {food}\n"
+
+        result += "\n"
+        return result
+
+
+if __name__ == "__main__":
+    url = "https://nutrition.sa.ucsc.edu/shortmenu.aspx?sName=UC+Santa+Cruz+Dining&locationNum=40&locationName" \
+          "=College+Nine%2fJohn+R.+Lewis+Dining+Hall&naFlag=1"
+    dh = DinningHall(url)
+
+    print(dh)
