@@ -64,11 +64,3 @@ class DinningHall:
 
         result += "\n"
         return result
-
-
-if __name__ == "__main__":
-    url = "https://nutrition.sa.ucsc.edu/shortmenu.aspx?sName=UC+Santa+Cruz+Dining&locationNum=40&locationName" \
-          "=College+Nine%2fJohn+R.+Lewis+Dining+Hall&naFlag=1"
-    dh = DinningHall(url)
-
-    print(dh)

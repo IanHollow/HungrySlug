@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-from dining_hall import DinningHall
+
+from web_app.src.dinning_hall import DinningHall
 
 
 class FoodOptions:

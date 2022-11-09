@@ -5,7 +5,7 @@ import os
 from firebase_admin import credentials, initialize_app, firestore
 
 CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(
-    __file__), "..", "google-credentials.json")
+    __file__), "", "../google-credentials.json")
 
 
 def generate_timestamp():
@@ -69,7 +69,7 @@ class FirebaseService:
             order = doc.to_dict()
             order["id"] = doc.id
             # breakpoint()
-            #order["order_at"] = order["order_at"].strftime("%Y-%m-%d %H:%M")
+            # order["order_at"] = order["order_at"].strftime("%Y-%m-%d %H:%M")
             orders.append(order)
         # sorting so latest order is first
         orders = sorted(orders, key=itemgetter("order_at"), reverse=True)
