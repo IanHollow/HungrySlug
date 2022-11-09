@@ -1,4 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<p>{{data}}</p>
+    {% for dh in data.dinning_halls %}
+        <h2>{{ dh }}</h2>
+        {% for meal in data.get_dh(dh).foods %}
+            <h3>{{ meal }}</h3>
+            <ul>
+                {% for food in data.dinning_halls[dh].get_meal(meal) %}
+                    <li>{{ food }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}

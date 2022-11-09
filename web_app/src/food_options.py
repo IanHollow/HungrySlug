@@ -8,13 +8,12 @@ class FoodOptions:
     main_url = "https://nutrition.sa.ucsc.edu/"
 
     def __init__(self) -> None:
-        self.dinning_halls = {}
-        self.get_dh_data()
+        self.dinning_halls = self.__retrieve_data()
 
-    def get_dh(self) -> dict:
-        return self.dinning_halls
+    def get_dh(self, name: str) -> DinningHall:
+        return self.dinning_halls[name]
 
-    def get_dh_data(self) -> None:
+    def __retrieve_data(self) -> dict:
         try:
             response = requests.get(self.main_url)
         except requests.exceptions.RequestException as e:  # This is the correct syntax
@@ -30,9 +29,12 @@ class FoodOptions:
             line = el.find("a")
             dh_urls.append(self.main_url + line.get('href'))
 
+        dhs = {}
         for dh_url in dh_urls:
             dinning_hall = DinningHall(dh_url)
-            self.dinning_halls[dinning_hall.name] = dinning_hall
+            dhs[dinning_hall.name] = dinning_hall
+
+        return dhs
 
     def __str__(self) -> str:
         result = ""

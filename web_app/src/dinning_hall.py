@@ -11,7 +11,7 @@ class DinningHall:
             'Dinner': [],
             'Late Night': []
         }
-        self.retrieve_data(url)
+        self.__retrieve_data(url)
 
     def get_name(self) -> str:
         return self.name
@@ -25,7 +25,7 @@ class DinningHall:
     def get_foods(self) -> dict:
         return self.foods
 
-    def retrieve_data(self, url: str) -> None:
+    def __retrieve_data(self, url: str) -> None:
         cookies = {
             'WebInaCartLocation': '',
             'WebInaCartDates': '',
