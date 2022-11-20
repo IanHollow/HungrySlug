@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 class DinningHall:
     def __init__(self, url: str) -> None:
         self.name = ""
-        self.foods = {
+        self.meals = {
             'Breakfast': [],
             'Lunch': [],
             'Dinner': [],
@@ -16,14 +16,14 @@ class DinningHall:
     def get_name(self) -> str:
         return self.name
 
-    def get_meal(self, meal: str) -> list[str]:
-        if meal in self.foods:
-            return self.foods[meal]
+    def get_foods(self, meal: str) -> list[str]:
+        if meal in self.meals:
+            return self.meals[meal]
         else:
             raise KeyError(f"meal type {meal} not available")
 
-    def get_foods(self) -> dict:
-        return self.foods
+    def get_meals(self) -> dict:
+        return self.meals
 
     def __retrieve_data(self, url: str) -> None:
         cookies = {
@@ -48,18 +48,18 @@ class DinningHall:
 
         mt_index = -1
         for element in soup.find_all("div", {"class": ["shortmenurecipes", "shortmenumeals"]}):
-            meal_times = list(self.foods.keys())
+            meal_times = list(self.meals.keys())
             if element.get_text() in meal_times:
                 mt_index += 1
             else:
-                self.foods[meal_times[mt_index]].append(
+                self.meals[meal_times[mt_index]].append(
                     element.get_text(strip=True))
 
     def __str__(self) -> str:
         result = f"{self.name}\n"
-        for meal_time in self.foods.keys():
+        for meal_time in self.meals.keys():
             result += f"    {meal_time}:\n"
-            for food in self.foods[meal_time]:
+            for food in self.meals[meal_time]:
                 result += f"        {food}\n"
 
         result += "\n"
