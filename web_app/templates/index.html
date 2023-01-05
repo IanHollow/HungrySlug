@@ -9,7 +9,7 @@
                         <div class="card-body">
                             <h3 class="card-title text-start">{{ dh }}</h3>
                             <div class="accordion" id="mealAccordion">
-                                {% for meal in data.get_dh(dh).foods.keys() %}
+                                {% for meal in data.get_dh(dh).meals.keys() %}
                                     <div class="accordion-item">
                                         <h4 class="accordion-header" id="heading{{ meal | string }}">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -25,7 +25,7 @@
                                              data-bs-parent="#mealAccordion">
                                             <div class="accordion-body card-text">
                                                 <ul class="list-group list-group-flush text-start">
-                                                    {% for food in data.dinning_halls[dh].get_meal(meal) %}
+                                                    {% for food in data.get_dh(dh).get_foods(meal) %}
                                                         <li class="list-group-item">{{ food }}</li>
                                                     {% endfor %}
                                                 </ul>
